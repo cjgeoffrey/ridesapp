@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model RideData {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  Departure DateTime
+  Return DateTime
+  DepartureStationId String
+  DepartureStationName String
+  ReturnStationId String
+  ReturnStationName String
+  CoveredDistanceInMeters Int
+  DurationInSec Int
+
+}
+
+// model Station {
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   ID String
+//   Nimi String
+//   Namn String
+//   Name String
+//   Osoite String
+//   Address String
+//   Kaupunki String
+//   Stad String
+//   Operaattor String
+//   Kapasiteet Int
+//   x Float
+//   y Float
+// }
