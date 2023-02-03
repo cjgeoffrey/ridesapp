@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  // previewFeatures = ["mongodb"]
 }
 
 datasource db {
@@ -10,7 +11,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model RideData {
+// model RidesData {
+//   id String @id @default(auto()) @map("_id") @db.ObjectId
+//   rides RideData
+//   stations StationData
+
+//   @@schema("base")
+  
+//   }
+
+
+model ridesData {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   Departure DateTime
   Return DateTime
@@ -23,18 +34,18 @@ model RideData {
 
 }
 
-// model Station {
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   ID String
-//   Nimi String
-//   Namn String
-//   Name String
-//   Osoite String
-//   Address String
-//   Kaupunki String
-//   Stad String
-//   Operaattor String
-//   Kapasiteet Int
-//   x Float
-//   y Float
-// }
+model StationData {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  ID String
+  Nimi String
+  Namn String
+  Name String
+  Osoite String
+  Address String
+  Kaupunki String
+  Stad String
+  Operaattor String
+  Kapasiteet Int
+  x Float
+  y Float
+}
