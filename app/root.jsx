@@ -6,6 +6,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import MainHeader, {
+  links as HeaderStyleLinks,
+} from "./components/navigation/MainHeader";
 
 export const meta = () => ({
   charset: "utf-8",
@@ -21,6 +24,7 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <MainHeader />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
@@ -28,4 +32,8 @@ export default function App() {
       </body>
     </html>
   );
+}
+
+export function links() {
+  return [...HeaderStyleLinks()];
 }

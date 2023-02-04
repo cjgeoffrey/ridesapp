@@ -3,7 +3,7 @@ import styles from "../styles/homeStyles.css";
 
 export default function Index() {
   return (
-    <>
+    <div className="homeContainer">
       <h1>Welcome to Rides App </h1>
       <div
         className="homeLinksContainer"
@@ -15,7 +15,7 @@ export default function Index() {
           <Link to="/stations">Stations</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

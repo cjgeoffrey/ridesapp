@@ -1,0 +1,25 @@
+.homeLinksContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.homeLinks {
+  display: flex;
+  height: 20rem;
+  width: 20rem;
+  border-radius: 15px;
+  background-color: var(--color-primary-50);
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: x-large;
+  font-weight: 500;
+}
