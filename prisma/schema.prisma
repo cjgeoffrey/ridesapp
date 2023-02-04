@@ -34,16 +34,16 @@ model ridesData {
 
 }
 
-model StationData {
+model stationInfo {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   ID String
-  Nimi String
-  Namn String
+  // Nimi String
+  // Namn String
   Name String
   Osoite String
-  Address String
+  // Address String
   Kaupunki String
-  Stad String
+  // Stad String
   Operaattor String
   Kapasiteet Int
   x Float
