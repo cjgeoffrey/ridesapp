@@ -1,31 +1,51 @@
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useSearchParams } from "@remix-run/react";
 import styles from "./RidesList.css";
+import Pagination from "./Pagination";
+import { useRef } from "react";
 
+const PER_PAGE = 20;
 function StationsList() {
   const stations = useLoaderData();
 
-  return (
-    <div id="ride-list">
-      {stations.stations.map((stations, index) => (
-        <div key={stations.id} className="ride">
-          {/* Link here points to notes.$noteId.jsx to render content dyamically */}
-          <Link to={stations.id}>
-            <article>
-              <div className="ride-info">
-                <div>#{index + 1}</div>
-                <div>{stations.Name}</div>
-                <div>{stations.Osoite}</div>
-                <div>{stations.Kaupunki}</div>
-                <div>{stations.Kapasiteet} </div>
-              </div>
-              <h2>{stations.title}</h2>
+  const stationRef = useRef();
 
-              <p>{stations.content}</p>
-            </article>
-          </Link>
-        </div>
-      ))}
-    </div>
+  const finalPage = Math.ceil(stations.count / PER_PAGE);
+
+  return (
+    <>
+      <Pagination totalPages={finalPage} pageParam="page" />
+      <div id="ride-list">
+        {stations.stations.map((stations) => (
+          <div key={stations.id} className="ride">
+            {/* Link here points to stations.$stationId.jsx to render content dyamically */}
+            <Link to={stations.id}>
+              <article>
+                <div className="ride-info">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}>
+                    <div style={{ color: "black", marginBottom: "2vh" }}>
+                      Station Name:
+                    </div>{" "}
+                    <div
+                      style={{ fontWeight: "bold", fontSize: "large" }}
+                      ref={stationRef}>
+                      {stations.Name}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </Link>
+          </div>
+        ))}
+      </div>
+      <Pagination totalPages={finalPage} pageParam="page" />
+    </>
   );
 }
 

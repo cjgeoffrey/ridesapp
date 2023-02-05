@@ -8,12 +8,13 @@ export default function Index() {
       <div
         className="homeLinksContainer"
         style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-        <div className="homeLinks">
-          <Link to="/rides">Rides</Link>
-        </div>
-        <div className="homeLinks">
-          <Link to="/stations">Stations</Link>
-        </div>
+        <Link to="/rides">
+          {" "}
+          <div className="homeLinks">Rides</div>
+        </Link>
+        <Link to="/stations">
+          <div className="homeLinks">Stations</div>
+        </Link>
       </div>
     </div>
   );

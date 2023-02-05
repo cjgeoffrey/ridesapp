@@ -25,27 +25,25 @@ model ridesData {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   Departure DateTime
   Return DateTime
-  DepartureStationId String
+  DepartureStationId String 
   DepartureStationName String
-  ReturnStationId String
+  ReturnStationId String 
   ReturnStationName String
   CoveredDistanceInMeters Int
   DurationInSec Int
+  StationData stationInfo[]
 
 }
 
 model stationInfo {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  ID String
-  // Nimi String
-  // Namn String
-  Name String
+  ID String  @db.ObjectId
+  Name String 
   Osoite String
-  // Address String
   Kaupunki String
-  // Stad String
   Operaattor String
   Kapasiteet Int
   x Float
   y Float
+  RideStationId ridesData @relation(fields: [ID], references: [id])
 }

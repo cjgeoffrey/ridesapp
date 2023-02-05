@@ -31,6 +31,7 @@ export async function getStationsData({ take, skip }) {
 export async function getRideData(id) {
   try {
     const ride = await prisma.ridesData.findFirst({ where: { id } });
+
     return ride;
   } catch (error) {
     throw error;
@@ -40,8 +41,27 @@ export async function getRideData(id) {
 export async function getStationData(id) {
   try {
     const station = await prisma.stationInfo.findFirst({ where: { id } });
-    return station;
+    const stationName = station.Name;
+    const ridesDataFromStation = await prisma.ridesData.count({
+      where: {
+        DepartureStationName: stationName,
+      },
+    });
+    const ridesDataToStation = await prisma.ridesData.count({
+      where: {
+        ReturnStationName: stationName,
+      },
+    });
+
+    return { station, ridesDataFromStation, ridesDataToStation };
   } catch (error) {
     throw error;
   }
+}
+
+export async function getRideInfoFromStation(Name) {
+  const ridesDataFromStation = await prisma.ridesData.count({
+    where: { DepartureStationName: Name },
+  });
+  return ridesDataFromStation;
 }

@@ -1,14 +1,11 @@
-import { useLoaderData, Link } from "@remix-run/react";
 import { getStationsData } from "../../data/rides.server";
 import StationsList, {
   links as stationsStylesLinks,
 } from "~/components/StationsList";
 
-const PER_PAGE = 20;
+const PER_PAGE = 24;
 
-export default function RidesInfo() {
-  const stations = useLoaderData();
-  // console.log(stations);
+export default function StationsInfo() {
   return (
     <>
       <StationsList />
@@ -28,9 +25,12 @@ export async function loader({ request }) {
   };
 
   const stations = await getStationsData(paginationOptions);
+
   const count = 457; //Obtained manually from MongoDB
   return { stations, count };
 }
+
+//Get selected station name on clicking the target station
 
 export function links() {
   return [...stationsStylesLinks()];

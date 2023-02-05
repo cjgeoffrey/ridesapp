@@ -1,12 +1,9 @@
-import { Link, useLoaderData, useMatches, useParams } from "@remix-run/react";
-import RideInfo from "../../components/RideInfo";
-import RideList from "../../components/ridesList";
 import StationInfo, {
   links as stationInfoStylesLinks,
 } from "../../components/StationInfo";
 import { getStationData } from "../../data/rides.server";
 
-export default function RideDetailsPage() {
+export default function StationDetailsPage() {
   return <StationInfo />;
 }
 

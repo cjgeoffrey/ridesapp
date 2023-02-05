@@ -135,7 +135,7 @@ function Logo() {
 var Logo_default = Logo;
 
 // app/styles/MainHeaderStyles.css
-var MainHeaderStyles_default = "/build/_assets/MainHeaderStyles-QBYCWGNT.css";
+var MainHeaderStyles_default = "/build/_assets/MainHeaderStyles-RMYLEXC3.css";
 
 // app/components/navigation/MainHeader.jsx
 var import_jsx_dev_runtime3 = require("react/jsx-dev-runtime");
@@ -262,11 +262,10 @@ function links2() {
 // app/routes/stations/index.jsx
 var stations_exports = {};
 __export(stations_exports, {
-  default: () => RidesInfo,
+  default: () => StationsInfo,
   links: () => links4,
   loader: () => loader
 });
-var import_react6 = require("@remix-run/react");
 
 // app/data/database.server.js
 var import_client = require("@prisma/client"), prisma;
@@ -299,189 +298,40 @@ async function getRideData(id) {
 }
 async function getStationData(id) {
   try {
-    return await prisma.stationInfo.findFirst({ where: { id } });
+    let station = await prisma.stationInfo.findFirst({ where: { id } }), stationName = station.Name, ridesDataFromStation = await prisma.ridesData.count({
+      where: {
+        DepartureStationName: stationName
+      }
+    }), ridesDataToStation = await prisma.ridesData.count({
+      where: {
+        ReturnStationName: stationName
+      }
+    });
+    return { station, ridesDataFromStation, ridesDataToStation };
   } catch (error) {
     throw error;
   }
 }
 
 // app/components/StationsList.js
-var import_react5 = require("@remix-run/react");
+var import_react7 = require("@remix-run/react");
 
 // app/components/RidesList.css
-var RidesList_default = "/build/_assets/RidesList-TMTZVEK7.css";
-
-// app/components/StationsList.js
-var import_jsx_dev_runtime5 = require("react/jsx-dev-runtime");
-function StationsList() {
-  let stations = (0, import_react5.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { id: "ride-list", children: stations.stations.map((stations2, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react5.Link, { to: stations2.id, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("article", { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "ride-info", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: [
-        "#",
-        index + 1
-      ] }, void 0, !0, {
-        fileName: "app/components/StationsList.js",
-        lineNumber: 15,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: stations2.Name }, void 0, !1, {
-        fileName: "app/components/StationsList.js",
-        lineNumber: 16,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: stations2.Osoite }, void 0, !1, {
-        fileName: "app/components/StationsList.js",
-        lineNumber: 17,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: stations2.Kaupunki }, void 0, !1, {
-        fileName: "app/components/StationsList.js",
-        lineNumber: 18,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: [
-        stations2.Kapasiteet,
-        " "
-      ] }, void 0, !0, {
-        fileName: "app/components/StationsList.js",
-        lineNumber: 19,
-        columnNumber: 17
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/components/StationsList.js",
-      lineNumber: 14,
-      columnNumber: 15
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("h2", { children: stations2.title }, void 0, !1, {
-      fileName: "app/components/StationsList.js",
-      lineNumber: 21,
-      columnNumber: 15
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("p", { children: stations2.content }, void 0, !1, {
-      fileName: "app/components/StationsList.js",
-      lineNumber: 23,
-      columnNumber: 15
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/components/StationsList.js",
-    lineNumber: 13,
-    columnNumber: 13
-  }, this) }, void 0, !1, {
-    fileName: "app/components/StationsList.js",
-    lineNumber: 12,
-    columnNumber: 11
-  }, this) }, stations2.id, !1, {
-    fileName: "app/components/StationsList.js",
-    lineNumber: 10,
-    columnNumber: 9
-  }, this)) }, void 0, !1, {
-    fileName: "app/components/StationsList.js",
-    lineNumber: 8,
-    columnNumber: 5
-  }, this);
-}
-var StationsList_default = StationsList;
-function links3() {
-  return [{ rel: "stylesheet", href: RidesList_default }];
-}
-
-// app/routes/stations/index.jsx
-var import_jsx_dev_runtime6 = require("react/jsx-dev-runtime"), PER_PAGE = 20;
-function RidesInfo() {
-  let stations = (0, import_react6.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(StationsList_default, {}, void 0, !1, {
-    fileName: "app/routes/stations/index.jsx",
-    lineNumber: 14,
-    columnNumber: 7
-  }, this) }, void 0, !1, {
-    fileName: "app/routes/stations/index.jsx",
-    lineNumber: 13,
-    columnNumber: 5
-  }, this);
-}
-async function loader({ request }) {
-  let query = new URL(request.url).searchParams, currentPage = Math.max(Number(query.get("page") || 1), 1), paginationOptions = {
-    take: PER_PAGE,
-    skip: (currentPage - 1) * PER_PAGE
-  };
-  return { stations: await getStationsData(paginationOptions), count: 457 };
-}
-function links4() {
-  return [...links3()];
-}
-
-// app/routes/stations/$id.jsx
-var id_exports = {};
-__export(id_exports, {
-  default: () => RideDetailsPage,
-  links: () => links8,
-  loader: () => loader2
-});
-var import_react14 = require("@remix-run/react");
-
-// app/components/RideInfo.js
-var import_react7 = require("react"), import_react8 = require("@remix-run/react");
-var import_jsx_dev_runtime7 = require("react/jsx-dev-runtime"), RideInfo = () => {
-  let ride = (0, import_react8.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { id: "ride-list", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "ride-info", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { children: ride.DepartureStationName }, void 0, !1, {
-      fileName: "app/components/RideInfo.js",
-      lineNumber: 12,
-      columnNumber: 11
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { children: ride.ReturnStationName }, void 0, !1, {
-      fileName: "app/components/RideInfo.js",
-      lineNumber: 13,
-      columnNumber: 11
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { children: ride.DistanceCovered }, void 0, !1, {
-      fileName: "app/components/RideInfo.js",
-      lineNumber: 14,
-      columnNumber: 11
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { children: [
-      (ride.DurationInSec / 60).toFixed(0),
-      " minutes"
-    ] }, void 0, !0, {
-      fileName: "app/components/RideInfo.js",
-      lineNumber: 15,
-      columnNumber: 11
-    }, this)
-  ] }, void 0, !0, {
-    fileName: "app/components/RideInfo.js",
-    lineNumber: 11,
-    columnNumber: 9
-  }, this) }, ride.id, !1, {
-    fileName: "app/components/RideInfo.js",
-    lineNumber: 10,
-    columnNumber: 7
-  }, this) }, void 0, !1, {
-    fileName: "app/components/RideInfo.js",
-    lineNumber: 9,
-    columnNumber: 5
-  }, this);
-}, RideInfo_default = RideInfo;
-function links5() {
-  return [{ rel: "stylesheet", href: RidesList_default }];
-}
-
-// app/components/RidesList.js
-var import_react11 = require("@remix-run/react");
+var RidesList_default = "/build/_assets/RidesList-4AIK3LDX.css";
 
 // app/components/Pagination.js
-var import_react9 = require("react"), import_react10 = require("@remix-run/react"), import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), Pagination = ({
+var import_react5 = require("react"), import_react6 = require("@remix-run/react"), import_jsx_dev_runtime5 = require("react/jsx-dev-runtime"), Pagination = ({
   totalPages = Number.MAX_SAFE_INTEGER,
   pageParam = "page",
   className = "",
   ...attrs
 }) => {
-  let [queryParams] = (0, import_react10.useSearchParams)(), currentPage = Number(queryParams.get(pageParam) || 1);
+  let [queryParams] = (0, import_react6.useSearchParams)(), currentPage = Number(queryParams.get(pageParam) || 1);
   totalPages = Number(totalPages);
   let previousQuery = new URLSearchParams(queryParams);
   previousQuery.set(pageParam, currentPage - 1);
   let nextQuery = new URLSearchParams(queryParams);
-  return nextQuery.set(pageParam, currentPage + 1), /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+  return nextQuery.set(pageParam, currentPage + 1), /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
     "nav",
     {
       id: "main-nav",
@@ -494,13 +344,13 @@ var import_react9 = require("react"), import_react10 = require("@remix-run/react
       className: ["flex justify-between", className].filter(Boolean).join(" "),
       ...attrs,
       children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { style: { display: "flex", margin: "5px", marginRight: "10vw" }, children: [
-          currentPage <= 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { children: "Previous Page" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { style: { display: "flex", margin: "5px", marginRight: "10vw" }, children: [
+          currentPage <= 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "Previous Page" }, void 0, !1, {
             fileName: "app/components/Pagination.js",
             lineNumber: 37,
             columnNumber: 30
           }, this),
-          currentPage > 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_react10.Link, { to: `?${previousQuery.toString()}`, children: "Previous Page" }, void 0, !1, {
+          currentPage > 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react6.Link, { to: `?${previousQuery.toString()}`, children: "Previous Page" }, void 0, !1, {
             fileName: "app/components/Pagination.js",
             lineNumber: 39,
             columnNumber: 11
@@ -510,7 +360,7 @@ var import_react9 = require("react"), import_react10 = require("@remix-run/react
           lineNumber: 36,
           columnNumber: 7
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(
           "div",
           {
             style: {
@@ -520,13 +370,13 @@ var import_react9 = require("react"), import_react10 = require("@remix-run/react
               columnGap: "5rem"
             },
             children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
-                currentPage <= 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { children: "First page" }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: [
+                currentPage <= 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "First page" }, void 0, !1, {
                   fileName: "app/components/Pagination.js",
                   lineNumber: 50,
                   columnNumber: 32
                 }, this),
-                currentPage > 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_react10.Link, { to: `?${previousQuery.toString()}`, children: currentPage - 1 }, void 0, !1, {
+                currentPage > 1 && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react6.Link, { to: `?${previousQuery.toString()}`, children: currentPage - 1 }, void 0, !1, {
                   fileName: "app/components/Pagination.js",
                   lineNumber: 52,
                   columnNumber: 13
@@ -536,18 +386,18 @@ var import_react9 = require("react"), import_react10 = require("@remix-run/react
                 lineNumber: 49,
                 columnNumber: 9
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: currentPage }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: currentPage }, void 0, !1, {
                 fileName: "app/components/Pagination.js",
                 lineNumber: 55,
                 columnNumber: 9
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
-                currentPage >= totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { children: "Last page" }, void 0, !1, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: [
+                currentPage >= totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "Last page" }, void 0, !1, {
                   fileName: "app/components/Pagination.js",
                   lineNumber: 57,
                   columnNumber: 41
                 }, this),
-                currentPage < totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_react10.Link, { to: `?${nextQuery.toString()}`, children: currentPage + 1 }, void 0, !1, {
+                currentPage < totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react6.Link, { to: `?${nextQuery.toString()}`, children: currentPage + 1 }, void 0, !1, {
                   fileName: "app/components/Pagination.js",
                   lineNumber: 59,
                   columnNumber: 13
@@ -568,13 +418,13 @@ var import_react9 = require("react"), import_react10 = require("@remix-run/react
           },
           this
         ),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { style: { display: "flex", margin: "5px", marginLeft: "10vw" }, children: [
-          currentPage >= totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { children: "Next Page" }, void 0, !1, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { style: { display: "flex", margin: "5px", marginLeft: "10vw" }, children: [
+          currentPage >= totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "Next Page" }, void 0, !1, {
             fileName: "app/components/Pagination.js",
             lineNumber: 65,
             columnNumber: 39
           }, this),
-          currentPage < totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_react10.Link, { to: `?${nextQuery.toString()}`, children: "Next Page" }, void 0, !1, {
+          currentPage < totalPages && /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(import_react6.Link, { to: `?${nextQuery.toString()}`, children: "Next Page" }, void 0, !1, {
             fileName: "app/components/Pagination.js",
             lineNumber: 67,
             columnNumber: 11
@@ -597,152 +447,250 @@ var import_react9 = require("react"), import_react10 = require("@remix-run/react
   );
 }, Pagination_default = Pagination;
 
-// app/components/RidesList.js
-var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime"), PER_PAGE2 = 20;
-function RidesList() {
-  let rides = (0, import_react11.useLoaderData)(), [searchParams] = (0, import_react11.useSearchParams)(), currentPage = searchParams.get("page") ? Number(searchParams.get("page")) : 1, finalPage = Math.ceil(rides.count / PER_PAGE2), prevPage = Math.max(currentPage - 1, finalPage), nextPage = Math.min(currentPage + 1, finalPage);
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_jsx_dev_runtime9.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(Pagination_default, { totalPages: rides.count, pageParam: "page" }, void 0, !1, {
-      fileName: "app/components/RidesList.js",
-      lineNumber: 24,
+// app/components/StationsList.js
+var import_react8 = require("react"), import_jsx_dev_runtime6 = require("react/jsx-dev-runtime"), PER_PAGE = 20;
+function StationsList() {
+  let stations = (0, import_react7.useLoaderData)(), stationRef = (0, import_react8.useRef)(), finalPage = Math.ceil(stations.count / PER_PAGE);
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Pagination_default, { totalPages: finalPage, pageParam: "page" }, void 0, !1, {
+      fileName: "app/components/StationsList.js",
+      lineNumber: 16,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { id: "ride-list", children: rides.rides.map((ride, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_react11.Link, { to: ride.id, children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("article", { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { className: "ride-info", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { children: ride.DepartureStationName }, void 0, !1, {
-          fileName: "app/components/RidesList.js",
-          lineNumber: 31,
-          columnNumber: 19
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { children: ride.ReturnStationName }, void 0, !1, {
-          fileName: "app/components/RidesList.js",
-          lineNumber: 32,
-          columnNumber: 19
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { children: [
-          (ride.CoveredDistanceInMeters / 1e3).toFixed(2),
-          " Km"
-        ] }, void 0, !0, {
-          fileName: "app/components/RidesList.js",
-          lineNumber: 33,
-          columnNumber: 19
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("div", { children: [
-          (ride.DurationInSec / 60).toFixed(0),
-          " minutes"
-        ] }, void 0, !0, {
-          fileName: "app/components/RidesList.js",
-          lineNumber: 36,
-          columnNumber: 19
-        }, this)
-      ] }, void 0, !0, {
-        fileName: "app/components/RidesList.js",
-        lineNumber: 30,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("h2", { children: ride.title }, void 0, !1, {
-        fileName: "app/components/RidesList.js",
-        lineNumber: 38,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("p", { children: ride.content }, void 0, !1, {
-        fileName: "app/components/RidesList.js",
-        lineNumber: 40,
-        columnNumber: 17
-      }, this)
-    ] }, void 0, !0, {
-      fileName: "app/components/RidesList.js",
-      lineNumber: 29,
+    /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { id: "ride-list", children: stations.stations.map((stations2) => /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_react7.Link, { to: stations2.id, children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("article", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "ride-info", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+      "div",
+      {
+        style: {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          textAlign: "center"
+        },
+        children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { style: { color: "black", marginBottom: "2vh" }, children: "Station Name:" }, void 0, !1, {
+            fileName: "app/components/StationsList.js",
+            lineNumber: 32,
+            columnNumber: 21
+          }, this),
+          " ",
+          /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(
+            "div",
+            {
+              style: { fontWeight: "bold", fontSize: "large" },
+              ref: stationRef,
+              children: stations2.Name
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/StationsList.js",
+              lineNumber: 35,
+              columnNumber: 21
+            },
+            this
+          )
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/StationsList.js",
+        lineNumber: 24,
+        columnNumber: 19
+      },
+      this
+    ) }, void 0, !1, {
+      fileName: "app/components/StationsList.js",
+      lineNumber: 23,
+      columnNumber: 17
+    }, this) }, void 0, !1, {
+      fileName: "app/components/StationsList.js",
+      lineNumber: 22,
       columnNumber: 15
     }, this) }, void 0, !1, {
-      fileName: "app/components/RidesList.js",
-      lineNumber: 28,
+      fileName: "app/components/StationsList.js",
+      lineNumber: 21,
       columnNumber: 13
-    }, this) }, ride.id, !1, {
-      fileName: "app/components/RidesList.js",
-      lineNumber: 27,
+    }, this) }, stations2.id, !1, {
+      fileName: "app/components/StationsList.js",
+      lineNumber: 19,
       columnNumber: 11
     }, this)) }, void 0, !1, {
-      fileName: "app/components/RidesList.js",
-      lineNumber: 25,
+      fileName: "app/components/StationsList.js",
+      lineNumber: 17,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(Pagination_default, { totalPages: rides.count, pageParam: "page" }, void 0, !1, {
-      fileName: "app/components/RidesList.js",
-      lineNumber: 46,
+    /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Pagination_default, { totalPages: finalPage, pageParam: "page" }, void 0, !1, {
+      fileName: "app/components/StationsList.js",
+      lineNumber: 47,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
-    fileName: "app/components/RidesList.js",
-    lineNumber: 23,
+    fileName: "app/components/StationsList.js",
+    lineNumber: 15,
     columnNumber: 5
   }, this);
 }
-var RidesList_default2 = RidesList;
-function links6() {
+var StationsList_default = StationsList;
+function links3() {
   return [{ rel: "stylesheet", href: RidesList_default }];
 }
 
+// app/routes/stations/index.jsx
+var import_jsx_dev_runtime7 = require("react/jsx-dev-runtime"), PER_PAGE2 = 24;
+function StationsInfo() {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_jsx_dev_runtime7.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(StationsList_default, {}, void 0, !1, {
+    fileName: "app/routes/stations/index.jsx",
+    lineNumber: 11,
+    columnNumber: 7
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/stations/index.jsx",
+    lineNumber: 10,
+    columnNumber: 5
+  }, this);
+}
+async function loader({ request }) {
+  let query = new URL(request.url).searchParams, currentPage = Math.max(Number(query.get("page") || 1), 1), paginationOptions = {
+    take: PER_PAGE2,
+    skip: (currentPage - 1) * PER_PAGE2
+  };
+  return { stations: await getStationsData(paginationOptions), count: 457 };
+}
+function links4() {
+  return [...links3()];
+}
+
+// app/routes/stations/$id.jsx
+var id_exports = {};
+__export(id_exports, {
+  default: () => StationDetailsPage,
+  links: () => links6,
+  loader: () => loader2
+});
+
 // app/components/StationInfo.js
-var import_react12 = require("react"), import_react13 = require("@remix-run/react");
-var import_jsx_dev_runtime10 = require("react/jsx-dev-runtime"), StationInfo = () => {
-  let station = (0, import_react13.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { id: "ride-list", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_react13.Link, { to: "..", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("article", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "ride-info", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: station.Name }, void 0, !1, {
+var import_react9 = require("react"), import_react10 = require("@remix-run/react");
+var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), StationInfo = () => {
+  let station = (0, import_react10.useLoaderData)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { id: "ride-list", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)(import_react10.Link, { to: "..", children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("article", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { className: "ride-info", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Station Name:" }, void 0, !1, {
+        fileName: "app/components/StationInfo.js",
+        lineNumber: 16,
+        columnNumber: 17
+      }, this),
+      " ",
+      station.Name
+    ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
-      lineNumber: 22,
+      lineNumber: 14,
       columnNumber: 15
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: station.Osoite }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Address:" }, void 0, !1, {
+        fileName: "app/components/StationInfo.js",
+        lineNumber: 21,
+        columnNumber: 17
+      }, this),
+      " ",
+      station.Osoite
+    ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
-      lineNumber: 23,
+      lineNumber: 19,
       columnNumber: 15
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: station.Kaupunki }, void 0, !1, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "City:" }, void 0, !1, {
+        fileName: "app/components/StationInfo.js",
+        lineNumber: 26,
+        columnNumber: 17
+      }, this),
+      " ",
+      station.Kaupunki
+    ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
       lineNumber: 24,
       columnNumber: 15
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Bike Capacity:" }, void 0, !1, {
+        fileName: "app/components/StationInfo.js",
+        lineNumber: 30,
+        columnNumber: 17
+      }, this),
+      " ",
       station.Kapasiteet,
       " "
     ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
-      lineNumber: 25,
+      lineNumber: 28,
+      columnNumber: 15
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Departure Rides:" }, void 0, !1, {
+        fileName: "app/components/StationInfo.js",
+        lineNumber: 35,
+        columnNumber: 17
+      }, this),
+      " ",
+      station.ridesDataFromStation
+    ] }, void 0, !0, {
+      fileName: "app/components/StationInfo.js",
+      lineNumber: 33,
+      columnNumber: 15
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Return Rides:" }, void 0, !1, {
+        fileName: "app/components/StationInfo.js",
+        lineNumber: 40,
+        columnNumber: 17
+      }, this),
+      " ",
+      station.ridesDataToStation
+    ] }, void 0, !0, {
+      fileName: "app/components/StationInfo.js",
+      lineNumber: 38,
       columnNumber: 15
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/StationInfo.js",
-    lineNumber: 21,
+    lineNumber: 13,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/components/StationInfo.js",
-    lineNumber: 20,
+    lineNumber: 12,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/components/StationInfo.js",
-    lineNumber: 19,
+    lineNumber: 11,
     columnNumber: 9
   }, this) }, station.id, !1, {
     fileName: "app/components/StationInfo.js",
-    lineNumber: 18,
+    lineNumber: 10,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/components/StationInfo.js",
-    lineNumber: 17,
+    lineNumber: 9,
     columnNumber: 5
   }, this);
 }, StationInfo_default = StationInfo;
-function links7() {
+function links5() {
   return [{ rel: "stylesheet", href: RidesList_default }];
 }
 
 // app/routes/stations/$id.jsx
-var import_jsx_dev_runtime11 = require("react/jsx-dev-runtime");
-function RideDetailsPage() {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(StationInfo_default, {}, void 0, !1, {
+var import_jsx_dev_runtime9 = require("react/jsx-dev-runtime");
+function StationDetailsPage() {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(StationInfo_default, {}, void 0, !1, {
     fileName: "app/routes/stations/$id.jsx",
-    lineNumber: 10,
+    lineNumber: 7,
     columnNumber: 10
   }, this);
 }
@@ -750,55 +698,239 @@ async function loader2({ params }) {
   let stationId = params.id;
   return await getStationData(stationId);
 }
-function links8() {
-  return [...links7()];
+function links6() {
+  return [...links5()];
 }
 
 // app/routes/rides/index.jsx
 var rides_exports = {};
 __export(rides_exports, {
-  default: () => RidesInfo2,
-  links: () => links9,
+  default: () => RidesInfo,
+  links: () => links8,
   loader: () => loader3
 });
-var import_react15 = require("@remix-run/react");
-var import_jsx_dev_runtime12 = require("react/jsx-dev-runtime"), PER_PAGE3 = 60;
-function RidesInfo2() {
-  let match = (0, import_react15.useMatches)(), loaderData = (0, import_react15.useLoaderData)();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(import_jsx_dev_runtime12.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)(RidesList_default2, {}, void 0, !1, {
+var import_react12 = require("@remix-run/react");
+
+// app/components/RidesList.js
+var import_react11 = require("@remix-run/react");
+var import_jsx_dev_runtime10 = require("react/jsx-dev-runtime"), PER_PAGE3 = 20;
+function RidesList() {
+  let rides = (0, import_react11.useLoaderData)(), [searchParams] = (0, import_react11.useSearchParams)(), currentPage = searchParams.get("page") ? Number(searchParams.get("page")) : 1, finalPage = Math.ceil(rides.count / PER_PAGE3);
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_jsx_dev_runtime10.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(Pagination_default, { totalPages: finalPage, pageParam: "page" }, void 0, !1, {
+      fileName: "app/components/RidesList.js",
+      lineNumber: 18,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { id: "ride-list", children: rides.rides.map((ride) => /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(import_react11.Link, { to: ride.id, children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("article", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { className: "ride-info", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("span", { style: { color: "black" }, children: "Departure Station:" }, void 0, !1, {
+          fileName: "app/components/RidesList.js",
+          lineNumber: 26,
+          columnNumber: 21
+        }, this),
+        " ",
+        ride.DepartureStationName
+      ] }, void 0, !0, {
+        fileName: "app/components/RidesList.js",
+        lineNumber: 25,
+        columnNumber: 19
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: [
+        " ",
+        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("span", { style: { color: "black" }, children: "Return Station:" }, void 0, !1, {
+          fileName: "app/components/RidesList.js",
+          lineNumber: 31,
+          columnNumber: 21
+        }, this),
+        " ",
+        ride.ReturnStationName
+      ] }, void 0, !0, {
+        fileName: "app/components/RidesList.js",
+        lineNumber: 29,
+        columnNumber: 19
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("span", { style: { color: "black" }, children: "Trip Distance:" }, void 0, !1, {
+          fileName: "app/components/RidesList.js",
+          lineNumber: 35,
+          columnNumber: 21
+        }, this),
+        " ",
+        (ride.CoveredDistanceInMeters / 1e3).toFixed(2),
+        " Km"
+      ] }, void 0, !0, {
+        fileName: "app/components/RidesList.js",
+        lineNumber: 34,
+        columnNumber: 19
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)("span", { style: { color: "black" }, children: "Trip Duration:" }, void 0, !1, {
+          fileName: "app/components/RidesList.js",
+          lineNumber: 39,
+          columnNumber: 21
+        }, this),
+        " ",
+        (ride.DurationInSec / 60).toFixed(0),
+        " minutes"
+      ] }, void 0, !0, {
+        fileName: "app/components/RidesList.js",
+        lineNumber: 38,
+        columnNumber: 19
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/components/RidesList.js",
+      lineNumber: 24,
+      columnNumber: 17
+    }, this) }, void 0, !1, {
+      fileName: "app/components/RidesList.js",
+      lineNumber: 23,
+      columnNumber: 15
+    }, this) }, void 0, !1, {
+      fileName: "app/components/RidesList.js",
+      lineNumber: 22,
+      columnNumber: 13
+    }, this) }, ride.id, !1, {
+      fileName: "app/components/RidesList.js",
+      lineNumber: 21,
+      columnNumber: 11
+    }, this)) }, void 0, !1, {
+      fileName: "app/components/RidesList.js",
+      lineNumber: 19,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime10.jsxDEV)(Pagination_default, { totalPages: finalPage, pageParam: "page" }, void 0, !1, {
+      fileName: "app/components/RidesList.js",
+      lineNumber: 48,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/components/RidesList.js",
+    lineNumber: 17,
+    columnNumber: 5
+  }, this);
+}
+var RidesList_default2 = RidesList;
+function links7() {
+  return [{ rel: "stylesheet", href: RidesList_default }];
+}
+
+// app/routes/rides/index.jsx
+var import_jsx_dev_runtime11 = require("react/jsx-dev-runtime"), PER_PAGE4 = 60;
+function RidesInfo() {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(import_jsx_dev_runtime11.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(RidesList_default2, {}, void 0, !1, {
     fileName: "app/routes/rides/index.jsx",
-    lineNumber: 13,
+    lineNumber: 9,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/rides/index.jsx",
-    lineNumber: 12,
+    lineNumber: 8,
     columnNumber: 5
   }, this);
 }
 async function loader3({ request }) {
   let query = new URL(request.url).searchParams, currentPage = Math.max(Number(query.get("page") || 1), 1), paginationOptions = {
-    take: PER_PAGE3,
-    skip: (currentPage - 1) * PER_PAGE3
+    take: PER_PAGE4,
+    skip: (currentPage - 1) * PER_PAGE4
   };
   return { rides: await getRidesData(paginationOptions), count: 3131088 };
 }
-function links9() {
-  return [...links6()];
+function links8() {
+  return [...links7()];
 }
 
 // app/routes/rides/$id.jsx
 var id_exports2 = {};
 __export(id_exports2, {
-  default: () => RideDetailsPage2,
+  default: () => RideDetailsPage,
   links: () => links10,
   loader: () => loader4
 });
-var import_react16 = require("@remix-run/react");
+
+// app/components/RideInfo.js
+var import_react13 = require("react"), import_react14 = require("@remix-run/react");
+var import_jsx_dev_runtime12 = require("react/jsx-dev-runtime"), RideInfo = () => {
+  let ride = (0, import_react14.useLoaderData)();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { id: "ride-list", children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "ride", children: /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { className: "ride-info", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { style: { color: "black" }, children: "Departure Station:" }, void 0, !1, {
+        fileName: "app/components/RideInfo.js",
+        lineNumber: 14,
+        columnNumber: 13
+      }, this),
+      " ",
+      ride.DepartureStationName
+    ] }, void 0, !0, {
+      fileName: "app/components/RideInfo.js",
+      lineNumber: 12,
+      columnNumber: 11
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { style: { color: "black" }, children: "Return Station:" }, void 0, !1, {
+        fileName: "app/components/RideInfo.js",
+        lineNumber: 18,
+        columnNumber: 13
+      }, this),
+      " ",
+      ride.ReturnStationName
+    ] }, void 0, !0, {
+      fileName: "app/components/RideInfo.js",
+      lineNumber: 17,
+      columnNumber: 11
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { children: [
+      " ",
+      /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { style: { color: "black" }, children: "Trip Distance:" }, void 0, !1, {
+        fileName: "app/components/RideInfo.js",
+        lineNumber: 23,
+        columnNumber: 13
+      }, this),
+      " ",
+      (ride.CoveredDistanceInMeters / 1e3).toFixed(2)
+    ] }, void 0, !0, {
+      fileName: "app/components/RideInfo.js",
+      lineNumber: 21,
+      columnNumber: 11
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime12.jsxDEV)("span", { style: { color: "black" }, children: "Trip Duration:" }, void 0, !1, {
+        fileName: "app/components/RideInfo.js",
+        lineNumber: 27,
+        columnNumber: 13
+      }, this),
+      " ",
+      (ride.DurationInSec / 60).toFixed(0),
+      " minutes"
+    ] }, void 0, !0, {
+      fileName: "app/components/RideInfo.js",
+      lineNumber: 26,
+      columnNumber: 11
+    }, this)
+  ] }, void 0, !0, {
+    fileName: "app/components/RideInfo.js",
+    lineNumber: 11,
+    columnNumber: 9
+  }, this) }, ride.id, !1, {
+    fileName: "app/components/RideInfo.js",
+    lineNumber: 10,
+    columnNumber: 7
+  }, this) }, void 0, !1, {
+    fileName: "app/components/RideInfo.js",
+    lineNumber: 9,
+    columnNumber: 5
+  }, this);
+}, RideInfo_default = RideInfo;
+function links9() {
+  return [{ rel: "stylesheet", href: RidesList_default }];
+}
+
+// app/routes/rides/$id.jsx
 var import_jsx_dev_runtime13 = require("react/jsx-dev-runtime");
-function RideDetailsPage2() {
+function RideDetailsPage() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(RideInfo_default, {}, void 0, !1, {
     fileName: "app/routes/rides/$id.jsx",
-    lineNumber: 9,
+    lineNumber: 8,
     columnNumber: 10
   }, this);
 }
@@ -807,7 +939,7 @@ async function loader4({ params }) {
   return await getRideData(rideId);
 }
 function links10() {
-  return [...links5()];
+  return [...links9()];
 }
 
 // app/routes/index.jsx
@@ -816,7 +948,7 @@ __export(routes_exports, {
   default: () => Index,
   links: () => links11
 });
-var import_react17 = require("@remix-run/react");
+var import_react15 = require("@remix-run/react");
 
 // app/styles/homeStyles.css
 var homeStyles_default = "/build/_assets/homeStyles-PUNR4TAF.css";
@@ -836,22 +968,25 @@ function Index() {
         className: "homeLinksContainer",
         style: { fontFamily: "system-ui, sans-serif", lineHeight: "1.4" },
         children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "homeLinks", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react17.Link, { to: "/rides", children: "Rides" }, void 0, !1, {
-            fileName: "app/routes/index.jsx",
-            lineNumber: 12,
-            columnNumber: 11
-          }, this) }, void 0, !1, {
+          /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react15.Link, { to: "/rides", children: [
+            " ",
+            /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "homeLinks", children: "Rides" }, void 0, !1, {
+              fileName: "app/routes/index.jsx",
+              lineNumber: 13,
+              columnNumber: 11
+            }, this)
+          ] }, void 0, !0, {
             fileName: "app/routes/index.jsx",
             lineNumber: 11,
             columnNumber: 9
           }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "homeLinks", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react17.Link, { to: "/stations", children: "Stations" }, void 0, !1, {
+          /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react15.Link, { to: "/stations", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "homeLinks", children: "Stations" }, void 0, !1, {
             fileName: "app/routes/index.jsx",
-            lineNumber: 15,
+            lineNumber: 16,
             columnNumber: 11
           }, this) }, void 0, !1, {
             fileName: "app/routes/index.jsx",
-            lineNumber: 14,
+            lineNumber: 15,
             columnNumber: 9
           }, this)
         ]
@@ -876,7 +1011,7 @@ function links11() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "1338e386", entry: { module: "/build/entry.client-CTWZ3OUB.js", imports: ["/build/_shared/chunk-CYEYFCYX.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-BJ5SBCZU.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-Y7GBRV3J.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/$id": { id: "routes/rides/$id", parentId: "root", path: "rides/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/rides/$id-LDDMWAL5.js", imports: ["/build/_shared/chunk-O6C2RKYB.js", "/build/_shared/chunk-5SP5FHKH.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/index": { id: "routes/rides/index", parentId: "root", path: "rides", index: !0, caseSensitive: void 0, module: "/build/routes/rides/index-M7FCB2IK.js", imports: ["/build/_shared/chunk-YCWOJM4P.js", "/build/_shared/chunk-5SP5FHKH.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/$id": { id: "routes/stations/$id", parentId: "root", path: "stations/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/stations/$id-QIP6GHQ5.js", imports: ["/build/_shared/chunk-YCWOJM4P.js", "/build/_shared/chunk-O6C2RKYB.js", "/build/_shared/chunk-5SP5FHKH.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/index": { id: "routes/stations/index", parentId: "root", path: "stations", index: !0, caseSensitive: void 0, module: "/build/routes/stations/index-XK6ML2OJ.js", imports: ["/build/_shared/chunk-5SP5FHKH.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, url: "/build/manifest-1338E386.js" };
+var assets_manifest_default = { version: "e2753700", entry: { module: "/build/entry.client-JCQTXIQG.js", imports: ["/build/_shared/chunk-IMM2XQNV.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-2UJCXX2L.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-YQSSYQ75.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/$id": { id: "routes/rides/$id", parentId: "root", path: "rides/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/rides/$id-FMSU2N7M.js", imports: ["/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/index": { id: "routes/rides/index", parentId: "root", path: "rides", index: !0, caseSensitive: void 0, module: "/build/routes/rides/index-XNCOCD5Y.js", imports: ["/build/_shared/chunk-5XFV64SV.js", "/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/$id": { id: "routes/stations/$id", parentId: "root", path: "stations/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/stations/$id-FOQOQTO7.js", imports: ["/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/index": { id: "routes/stations/index", parentId: "root", path: "stations", index: !0, caseSensitive: void 0, module: "/build/routes/stations/index-EWNXR5P7.js", imports: ["/build/_shared/chunk-5XFV64SV.js", "/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, url: "/build/manifest-E2753700.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { unstable_cssModules: !1, unstable_cssSideEffectImports: !1, unstable_dev: !1, unstable_vanillaExtract: !1, v2_errorBoundary: !1, v2_meta: !1, v2_routeConvention: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

@@ -4,10 +4,6 @@ import RidesList, { links as rideStylesLinks } from "~/components/RidesList";
 
 const PER_PAGE = 60;
 export default function RidesInfo() {
-  const match = useMatches();
-  const loaderData = useLoaderData();
-  // console.log(match);
-
   return (
     <>
       <RidesList />

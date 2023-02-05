@@ -12,38 +12,40 @@ function RidesList() {
     ? Number(searchParams.get("page"))
     : 1;
   const finalPage = Math.ceil(rides.count / PER_PAGE);
-  const prevPage = Math.max(currentPage - 1, finalPage);
-  const nextPage = Math.min(currentPage + 1, finalPage); //limiting next page between first and last pages
-
-  //   for (i in rides) {
-  //     console.log(rides[i].id);
-  //   }
 
   return (
     <>
-      <Pagination totalPages={rides.count} pageParam="page" />
+      <Pagination totalPages={finalPage} pageParam="page" />
       <div id="ride-list">
-        {rides.rides.map((ride, index) => (
+        {rides.rides.map((ride) => (
           <div key={ride.id} className="ride">
             <Link to={ride.id}>
               <article>
                 <div className="ride-info">
-                  <div>{ride.DepartureStationName}</div>
-                  <div>{ride.ReturnStationName}</div>
                   <div>
+                    <span style={{ color: "black" }}>Departure Station:</span>{" "}
+                    {ride.DepartureStationName}
+                  </div>
+                  <div>
+                    {" "}
+                    <span style={{ color: "black" }}>Return Station:</span>{" "}
+                    {ride.ReturnStationName}
+                  </div>
+                  <div>
+                    <span style={{ color: "black" }}>Trip Distance:</span>{" "}
                     {(ride.CoveredDistanceInMeters / 1000).toFixed(2)} Km
                   </div>
-                  <div>{(ride.DurationInSec / 60).toFixed(0)} minutes</div>
+                  <div>
+                    <span style={{ color: "black" }}>Trip Duration:</span>{" "}
+                    {(ride.DurationInSec / 60).toFixed(0)} minutes
+                  </div>
                 </div>
-                <h2>{ride.title}</h2>
-
-                <p>{ride.content}</p>
               </article>
             </Link>
           </div>
         ))}
       </div>
-      <Pagination totalPages={rides.count} pageParam="page" />
+      <Pagination totalPages={finalPage} pageParam="page" />
     </>
   );
 }
