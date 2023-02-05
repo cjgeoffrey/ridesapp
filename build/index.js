@@ -582,7 +582,7 @@ var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), StationInfo = ()
         columnNumber: 17
       }, this),
       " ",
-      station.Name
+      station.station.Name
     ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
       lineNumber: 14,
@@ -596,7 +596,7 @@ var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), StationInfo = ()
         columnNumber: 17
       }, this),
       " ",
-      station.Osoite
+      station.station.Osoite
     ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
       lineNumber: 19,
@@ -610,7 +610,7 @@ var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), StationInfo = ()
         columnNumber: 17
       }, this),
       " ",
-      station.Kaupunki
+      station.station.Kaupunki
     ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
       lineNumber: 24,
@@ -620,43 +620,43 @@ var import_jsx_dev_runtime8 = require("react/jsx-dev-runtime"), StationInfo = ()
       " ",
       /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Bike Capacity:" }, void 0, !1, {
         fileName: "app/components/StationInfo.js",
-        lineNumber: 30,
+        lineNumber: 31,
         columnNumber: 17
       }, this),
       " ",
-      station.Kapasiteet,
+      station.station.Kapasiteet,
       " "
     ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
-      lineNumber: 28,
+      lineNumber: 29,
       columnNumber: 15
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
       " ",
       /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Departure Rides:" }, void 0, !1, {
         fileName: "app/components/StationInfo.js",
-        lineNumber: 35,
+        lineNumber: 36,
         columnNumber: 17
       }, this),
       " ",
       station.ridesDataFromStation
     ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
-      lineNumber: 33,
+      lineNumber: 34,
       columnNumber: 15
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("div", { children: [
       " ",
       /* @__PURE__ */ (0, import_jsx_dev_runtime8.jsxDEV)("span", { style: { color: "black" }, children: "Return Rides:" }, void 0, !1, {
         fileName: "app/components/StationInfo.js",
-        lineNumber: 40,
+        lineNumber: 41,
         columnNumber: 17
       }, this),
       " ",
       station.ridesDataToStation
     ] }, void 0, !0, {
       fileName: "app/components/StationInfo.js",
-      lineNumber: 38,
+      lineNumber: 39,
       columnNumber: 15
     }, this)
   ] }, void 0, !0, {
@@ -1011,7 +1011,7 @@ function links11() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "e2753700", entry: { module: "/build/entry.client-JCQTXIQG.js", imports: ["/build/_shared/chunk-IMM2XQNV.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-2UJCXX2L.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-YQSSYQ75.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/$id": { id: "routes/rides/$id", parentId: "root", path: "rides/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/rides/$id-FMSU2N7M.js", imports: ["/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/index": { id: "routes/rides/index", parentId: "root", path: "rides", index: !0, caseSensitive: void 0, module: "/build/routes/rides/index-XNCOCD5Y.js", imports: ["/build/_shared/chunk-5XFV64SV.js", "/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/$id": { id: "routes/stations/$id", parentId: "root", path: "stations/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/stations/$id-FOQOQTO7.js", imports: ["/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/index": { id: "routes/stations/index", parentId: "root", path: "stations", index: !0, caseSensitive: void 0, module: "/build/routes/stations/index-EWNXR5P7.js", imports: ["/build/_shared/chunk-5XFV64SV.js", "/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, url: "/build/manifest-E2753700.js" };
+var assets_manifest_default = { version: "3e0a3987", entry: { module: "/build/entry.client-JCQTXIQG.js", imports: ["/build/_shared/chunk-IMM2XQNV.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-2UJCXX2L.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-YQSSYQ75.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/$id": { id: "routes/rides/$id", parentId: "root", path: "rides/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/rides/$id-FMSU2N7M.js", imports: ["/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/rides/index": { id: "routes/rides/index", parentId: "root", path: "rides", index: !0, caseSensitive: void 0, module: "/build/routes/rides/index-XNCOCD5Y.js", imports: ["/build/_shared/chunk-5XFV64SV.js", "/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/$id": { id: "routes/stations/$id", parentId: "root", path: "stations/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/stations/$id-CK64XGU5.js", imports: ["/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/stations/index": { id: "routes/stations/index", parentId: "root", path: "stations", index: !0, caseSensitive: void 0, module: "/build/routes/stations/index-EWNXR5P7.js", imports: ["/build/_shared/chunk-5XFV64SV.js", "/build/_shared/chunk-E5DVUUCQ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, url: "/build/manifest-3E0A3987.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { unstable_cssModules: !1, unstable_cssSideEffectImports: !1, unstable_dev: !1, unstable_vanillaExtract: !1, v2_errorBoundary: !1, v2_meta: !1, v2_routeConvention: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

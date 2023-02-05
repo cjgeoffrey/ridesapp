@@ -14,21 +14,22 @@ const StationInfo = () => {
               <div>
                 {" "}
                 <span style={{ color: "black" }}>Station Name:</span>{" "}
-                {station.Name}
+                {station.station.Name}
               </div>
               <div>
                 {" "}
                 <span style={{ color: "black" }}>Address:</span>{" "}
-                {station.Osoite}
+                {station.station.Osoite}
               </div>
               <div>
                 {" "}
-                <span style={{ color: "black" }}>City:</span> {station.Kaupunki}
+                <span style={{ color: "black" }}>City:</span>{" "}
+                {station.station.Kaupunki}
               </div>
               <div>
                 {" "}
                 <span style={{ color: "black" }}>Bike Capacity:</span>{" "}
-                {station.Kapasiteet}{" "}
+                {station.station.Kapasiteet}{" "}
               </div>
               <div>
                 {" "}
